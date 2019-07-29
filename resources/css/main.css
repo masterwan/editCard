@@ -1,0 +1,90 @@
+.search-card-panel {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+.no-results {
+    font-size: 40px;
+}
+
+.cards-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card-link-wrap {
+    display: block;
+    margin-bottom: 30px;
+}
+
+.card-link-wrap:hover {
+    text-decoration: none;
+}
+
+.card-item {
+    background: #f7f7f7;
+    border-radius: 30px;
+    /*border: 1px solid #fff;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    margin: 15px;
+    width: 220px;
+    overflow: hidden;
+}
+
+.card-item:hover, .card-item img {
+    background: #f3f3f3;
+    color: #fff;
+}
+
+.card-item img {
+    background: #dbe2e8;
+    display: block;
+    max-height: 400px;
+    height: 100%;
+}
+
+.card-link-wrap:hover .card-item img {
+    background: #E7EEF4!important;
+}
+
+
+.card-item p {
+    color: #343a40;
+    display: block;
+    font-size: 19px;
+    font-weight: bold;
+    padding: 15px;
+}
+
+.cards-wrap {
+    margin-bottom: 50px;
+}
+
+.paginator-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.paginator-wrap .page-link {
+    border: 0px solid #999;
+    color:#000;
+    margin: 5px;
+}
+
+.paginator-wrap .page-item.active .page-link {
+    background-color: #343a40;
+    border-color: #343a40;
+    border-radius: 50%;
+}
+
+.paginator-wrap .page-link:hover {
+    border-radius: 50%;
+}
+
+.paginator-wrap .page-link:focus {
+    box-shadow: none;
+}
