@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
@@ -40,5 +41,55 @@ class CardController extends Controller
                                                 'wears' => $wears->appends($request->input()),
                                                 'categories' => $categories,
                                                 ]);
+    }
+
+    public function edit($id)
+    {
+        $wear = DB::table('wear')->where('id', $id)->first();
+        $category_id = $wear->wear_category_id;
+        $sex = DB::table('wear_category')->where('id', $category_id)->first();
+
+        if (@is_array(getimagesize($wear->image_url))) $img_exist = True;
+        else $img_exist = False;
+
+        return view('index.cards.edit', ['wear' => $wear, 'sex' => $sex->sex_id, 'img_exist' => $img_exist]);
+    }
+
+    public function downloadImage($id)
+    {
+        $file = new Filesystem;
+        $file->cleanDirectory('images/temp');
+
+        $wear_image = DB::table('wear')->where('id', $id)->first()->image_url;
+
+        if (@is_array(getimagesize($wear_image))) {
+            $img_bin = file_get_contents($wear_image);
+            $img_array = explode('/', $wear_image);
+            $img_name = array_pop($img_array);
+            $save_img_path = 'images/temp/' . $img_name;
+            file_put_contents($save_img_path, $img_bin);
+
+            return \Response::download($save_img_path);
+        }
+
+        return back();
+    }
+
+    public function uploadImage($id)
+    {
+        $wear_image = DB::table('wear')->where('id', $id)->first()->image_url;
+        $img_array = explode('/', $wear_image);
+        $img_name = array_pop($img_array);
+
+        request()->validate(['wear_image' => 'required|image|mimes:png']);
+
+        \File::delete(public_path('images/api/wear/original/' . $img_name));
+
+        $img = request()->wear_image;
+//        $img_name = $img->getClientOriginalName();
+        $img->move(public_path('images\api\wear\original'), $img_name);
+
+        return back()
+            ->with('success','You have successfully upload image.');
     }
 }

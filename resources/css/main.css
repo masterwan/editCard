@@ -88,3 +88,16 @@
 .paginator-wrap .page-link:focus {
     box-shadow: none;
 }
+
+.card-body-wear {
+    background: #dbe2e8;
+}
+
+.card-body-wear-img {
+    position: absolute;
+    z-index: 9999;
+}
+
+.card-main-wrap .custom-file-label:after {
+    border-radius: 5px;
+}

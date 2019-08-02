@@ -37,7 +37,7 @@
                     <hr>
                     <div class="cards-wrap">
                         @forelse($wears as $wear)
-                            <a href="{{$wear->id}}" class="card-link-wrap">
+                            <a href="{{route('card_edit', $wear->id)}}" class="card-link-wrap">
                                 <div class="card-item">
                                     <img src="{{$wear->image_url}}" alt="">
                                     <p>{{$wear->name}}</p>
