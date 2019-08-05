@@ -10,3 +10,5 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 yourstyle.sql
+/.vagrant/machines/editcard/
+fydcydvm_ys.sql
